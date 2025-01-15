@@ -41,3 +41,27 @@ In the context of data engineering or data processing, the term **"stage"** can 
 ### 3. **Stages in a Pipeline**:
    - In a data pipeline or workflow, "stage" can refer to individual steps or phases in the pipeline.
    - Each stage represents
+-----------------------------------------------------------------------------------------------------------------------------------
+### Mount Point in Databricks:  
+A **mount point** connects external storage (like S3, Azure Blob) to Databricks so you can access files easily in DBFS.  
+
+### Key Points:  
+1. **Purpose**: Makes external data accessible like local files.  
+2. **Benefits**: Simplifies access; no need for complex APIs.  
+3. **Example Path**: `/mnt/mydata/myfile.csv`.  
+4. **Setup**:  
+   - Use `dbutils.fs.mount()` with credentials.  
+   - Specify storage details and mount location.  
+
+### Example Code:  
+**Mount S3:**  
+```python
+dbutils.fs.mount(
+    source="s3a://<ACCESS_KEY>:<ENCODED_SECRET_KEY>@<BUCKET_NAME>",
+    mount_point="/mnt/mydata"
+)
+```  
+**Verify:**  
+```python
+display(dbutils.fs.ls("/mnt/mydata"))
+```
